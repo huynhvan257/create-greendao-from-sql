@@ -1,0 +1,1 @@
+include ':app', ':DaoCore', ':DaoGenerator', ':generatorgreendao', ':sql2greendao'
