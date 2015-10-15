@@ -4,16 +4,16 @@ package de.greenrobot.daoexample;
 /**
  * Entity mapped to table "GROUP_USER".
  */
-public class group_user {
+public class Group_user {
 
     private Integer id;
     private Integer user_id;
     private Integer group_id;
 
-    public group_user() {
+    public Group_user() {
     }
 
-    public group_user(Integer id, Integer user_id, Integer group_id) {
+    public Group_user(Integer id, Integer user_id, Integer group_id) {
         this.id = id;
         this.user_id = user_id;
         this.group_id = group_id;

@@ -44,21 +44,23 @@ public class TableStructure {
                     tableStructure.setTableName(tableName);
 
                     //
-                    split = splits[1].trim();
-                    splits = split.split("\\)");
-                    split = splits[0].trim();
+                    split = commandString.replaceFirst(splits[0], "");
 
                     //
                     splits = split.split(",");
                     for (String slitColumn : splits){
+                        slitColumn = slitColumn.replace("(", "");
                         slitColumn = slitColumn.trim();
-                        String[] sColumn = slitColumn.split("`");
-                        if(sColumn.length > 2){
-                            Column column = new Column();
-                            column.setColumnName(sColumn[1]);
-                            String dataType = sColumn[2];
-                            column.parser(dataType);
-                            tableStructure.getColumns().add(column);
+                        String firstChar = slitColumn.substring(0, 1);
+                        if(firstChar.equals( "`")) {
+                            String[] sColumn = slitColumn.split("`");
+                            if (sColumn.length > 2) {
+                                Column column = new Column();
+                                column.setColumnName(sColumn[1]);
+                                String dataType = sColumn[2];
+                                column.parser(dataType);
+                                tableStructure.getColumns().add(column);
+                            }
                         }
                     }
                 }
@@ -74,7 +76,7 @@ public class TableStructure {
 
     public String createFunction(){
         String result = "\n private static void addNote" + tableName + "(Schema schema){\n" +
-                "\t Entity note = schema.addEntity(\"" + tableName + "\");";
+                "\t Entity note = schema.addEntity(\"" + capitalize(tableName) + "\");\n";
 
         for (Column column : columns){
 
@@ -86,5 +88,15 @@ public class TableStructure {
 
         result += "\n}";
         return result;
+    }
+
+    public static String capitalize(String name) {
+        if(name != null && name.length() != 0) {
+            char[] chars = name.toCharArray();
+            chars[0] = Character.toUpperCase(chars[0]);
+            return new String(chars);
+        } else {
+            return name;
+        }
     }
 }

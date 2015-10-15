@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
@@ -52,8 +53,7 @@ public class ScriptReader {
         String string = "public static void main(String[] args) throws Exception {" +
                 "\n" +
                 "\tSchema schema = new Schema(1000, \"" + dbName + "\");" +
-                "\n\n" +
-                "";
+                "\n";
         try {
             BufferedReader in = new BufferedReader(new FileReader(pathFile));
 
@@ -65,9 +65,9 @@ public class ScriptReader {
                 allFuncClass += tableStructure.createFunction();
             }
             string += funcName +
-                    "\n\tnew DaoGenerator().generateAll(schema, \"" + folderSource + "\");" +
+                    "\n\n\tnew DaoGenerator().generateAll(schema, \"" + folderSource + "\");" +
                     "\n}" +
-                    "\n\n";
+                    "\n";
             string += allFuncClass;
             System.out.println(string);
 
@@ -80,18 +80,14 @@ public class ScriptReader {
         }
 
         String result = packageName +  importFile + createClass + string + "\n}";
-        File file = new File(pathFileClass, className + ".java");
-        Writer writer = null;
+        pathFileClass +=  packageClass.replace(".", "/") + "/";
+//        File file = new File(pathFileClass, className + ".java");
         try {
-            writer = new FileWriter(file);
-            try {
-                writer.write(result);
-                System.out.println("Written " + file.getCanonicalPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                writer.close();
-            }
+            PrintWriter writer = new PrintWriter(pathFileClass + className + ".java", "UTF-8");
+            writer.println(result);
+            writer.close();
+            System.out.println("Written " + pathFileClass);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

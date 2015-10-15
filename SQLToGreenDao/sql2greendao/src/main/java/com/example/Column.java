@@ -102,18 +102,64 @@ public class Column {
             setAI(true);
         }
     }
+
+    //
+
+
+
+    //Byte, Short, Int, Long, Boolean, Float, Double, String, ByteArray, Date
     public String createNote(){
         String result = "";
-        String type = "";
-        switch (dataType.toLowerCase()){
-            case "int":
+        if(TextUtils.isEmpty(dataType.trim())){
+            return result;
+        }
+        String type;
+        switch (dataType.toUpperCase()){
+            case "INT":
+            case "INTEGER":
+            case "TINYINT":
+            case "SMALLINT":
+            case "MEDIUMINT":
+            case "BIGINT":
+            case "UNSIGNED BIG INT":
+            case "INT2":
+            case "INT8":
                 type = "Int";
                 break;
-            case "datetime":
-            case "timestamp":
+            case "REAL":
+            case "FLOAT":
+                type = "Float";
+                break;
+            case "DOUBLE":
+            case "DOUBLE PRECISION":
+                type = "Double";
+                break;
+            case "DATETIME":
+            case "TIMESTAMP":
+            case "DATE":
+            case "TIME":
                 type = "Date";
                 break;
-            case "varchar":
+            case "CHARACTER":
+            case "VARCHAR":
+            case "VARYING":
+            case "NCHAR":
+            case "NATIVE CHARACTER":
+            case "NVARCHAR":
+            case "TEXT":
+            case "CLOB":
+                type = "String";
+                break;
+            case "BLOB":
+            case "LONGBLOB":
+            case "MEDIUMBLOB":
+            case "TINYBLOB":
+                type = "Byte";
+                break;
+            case "BOOLEAN":
+                type = "Boolean";
+                break;
+            default:
                 type = "String";
                 break;
         }

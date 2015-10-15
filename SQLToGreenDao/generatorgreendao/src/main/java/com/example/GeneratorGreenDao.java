@@ -12,28 +12,63 @@ public class GeneratorGreenDao {
 public static void main(String[] args) throws Exception {
 	Schema schema = new Schema(1000, "de.greenrobot.daoexample");
 
-
 	addNotegroup_user(schema);
 	addNoteuser(schema);
 	addNotegroup(schema);
+	addNotecategory(schema);
+
 	new DaoGenerator().generateAll(schema, "../app/src/main/java");
 }
 
-
  private static void addNotegroup_user(Schema schema){
-	 Entity note = schema.addEntity("group_user");
+	 Entity note = schema.addEntity("Group_user");
+
 	 note.addIntProperty("id");
 	 note.addIntProperty("user_id");
 	 note.addIntProperty("group_id");
 }
  private static void addNoteuser(Schema schema){
-	 Entity note = schema.addEntity("user");
+	 Entity note = schema.addEntity("User");
+
 	 note.addIntProperty("id");
 	 note.addStringProperty("name");
+	 note.addStringProperty("email");
+	 note.addDateProperty("create_at");
+	 note.addDateProperty("update_at");
 }
  private static void addNotegroup(Schema schema){
-	 Entity note = schema.addEntity("group");
+	 Entity note = schema.addEntity("Group");
+
 	 note.addIntProperty("id");
 	 note.addStringProperty("name");
+	 note.addStringProperty("description");
+}
+ private static void addNotecategory(Schema schema){
+	 Entity note = schema.addEntity("Category");
+
+	 note.addIntProperty("id");
+	 note.addStringProperty("categorycol");
+	 note.addStringProperty("categorycol1");
+	 note.addDateProperty("categorycol2");
+	 note.addByteProperty("categorycol3");
+	 note.addStringProperty("categorycol4");
+	 note.addStringProperty("categorycol5");
+	 note.addByteProperty("categorycol6");
+	 note.addByteProperty("categorycol7");
+	 note.addByteProperty("categorycol8");
+	 note.addByteProperty("categorycol9");
+	 note.addStringProperty("categorycol10");
+	 note.addDateProperty("categorycol11");
+	 note.addStringProperty("categorycol12");
+	 note.addStringProperty("categorycol13");
+	 note.addStringProperty("categorycol14");
+	 note.addStringProperty("categorycol15");
+	 note.addStringProperty("categorycol16");
+	 note.addStringProperty("categorycol17");
+	 note.addStringProperty("categorycol18");
+	 note.addStringProperty("categorycol19");
+	 note.addStringProperty("categorycol20");
+	 note.addStringProperty("categorycol21");
+	 note.addStringProperty("categorycol22");
 }
 }

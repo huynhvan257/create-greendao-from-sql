@@ -4,17 +4,23 @@ package de.greenrobot.daoexample;
 /**
  * Entity mapped to table "USER".
  */
-public class user {
+public class User {
 
     private Integer id;
     private String name;
+    private String email;
+    private java.util.Date create_at;
+    private java.util.Date update_at;
 
-    public user() {
+    public User() {
     }
 
-    public user(Integer id, String name) {
+    public User(Integer id, String name, String email, java.util.Date create_at, java.util.Date update_at) {
         this.id = id;
         this.name = name;
+        this.email = email;
+        this.create_at = create_at;
+        this.update_at = update_at;
     }
 
     public Integer getId() {
@@ -31,6 +37,30 @@ public class user {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public java.util.Date getCreate_at() {
+        return create_at;
+    }
+
+    public void setCreate_at(java.util.Date create_at) {
+        this.create_at = create_at;
+    }
+
+    public java.util.Date getUpdate_at() {
+        return update_at;
+    }
+
+    public void setUpdate_at(java.util.Date update_at) {
+        this.update_at = update_at;
     }
 
 }
