@@ -29,7 +29,7 @@ public class TableStructure {
         this.columns = columns;
     }
 
-    public static TableStructure parser(String commandString) {
+    public static TableStructure parser(String commandString){
 
         TableStructure tableStructure = null;
         if (commandString.startsWith("CREATE TABLE")) {
@@ -48,11 +48,11 @@ public class TableStructure {
 
                     //
                     splits = split.split(",");
-                    for (String slitColumn : splits) {
+                    for (String slitColumn : splits){
                         slitColumn = slitColumn.replace("(", "");
                         slitColumn = slitColumn.trim();
                         String firstChar = slitColumn.substring(0, 1);
-                        if (firstChar.equals("`")) {
+                        if(firstChar.equals( "`")) {
                             String[] sColumn = slitColumn.split("`");
                             if (sColumn.length > 2) {
                                 Column column = new Column();
@@ -70,18 +70,18 @@ public class TableStructure {
         return tableStructure;
     }
 
-    public String functionName() {
+    public String functionName(){
         return "addNote" + tableName + "(schema);";
     }
 
-    public String createFunction() {
+    public String createFunction(){
         String result = "\n private static void addNote" + tableName + "(Schema schema){\n" +
                 "\t Entity note = schema.addEntity(\"" + capitalize(tableName) + "\");\n";
 
-        for (Column column : columns) {
+        for (Column column : columns){
 
             String sColumn = column.createNote();
-            if (!TextUtils.isEmpty(sColumn)) {
+            if(!TextUtils.isEmpty(sColumn)) {
                 result += "\n\t " + "note." + sColumn;
             }
         }
@@ -91,7 +91,7 @@ public class TableStructure {
     }
 
     public static String capitalize(String name) {
-        if (name != null && name.length() != 0) {
+        if(name != null && name.length() != 0) {
             char[] chars = name.toCharArray();
             chars[0] = Character.toUpperCase(chars[0]);
             return new String(chars);
