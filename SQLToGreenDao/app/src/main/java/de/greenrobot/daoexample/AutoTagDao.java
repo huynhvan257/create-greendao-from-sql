@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
-//Commit 2
+
 
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.Property;

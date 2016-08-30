@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.Map;
 
-// Commit 2
+
 
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.AbstractDaoSession;
