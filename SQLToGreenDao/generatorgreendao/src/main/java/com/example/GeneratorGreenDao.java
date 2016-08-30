@@ -12,10 +12,11 @@ public class GeneratorGreenDao {
 public static void main(String[] args) throws Exception {
 	Schema schema = new Schema(1000, "de.greenrobot.daoexample");
 
-	addNotegroup_user(schema);
-	addNoteuser(schema);
-	addNotegroup(schema);
-	addNotecategory(schema);
+//	addNotegroup_user(schema);
+//	addNotegroup(schema);
+//	addNoteuser(schema);
+//	addNotecategory(schema);
+	addAutoTag(schema);
 
 	new DaoGenerator().generateAll(schema, "../app/src/main/java");
 }
@@ -35,13 +36,18 @@ public static void main(String[] args) throws Exception {
 	 note.addStringProperty("email");
 	 note.addDateProperty("create_at");
 	 note.addDateProperty("update_at");
-}
- private static void addNotegroup(Schema schema){
-	 Entity note = schema.addEntity("Group");
+	 Property property = note.addIntProperty("group_id").getProperty();
+	 note.addToOne(noteGroup, property);
 
-	 note.addIntProperty("id");
-	 note.addStringProperty("name");
-	 note.addStringProperty("description");
+}
+
+	public static Entity noteGroup;
+ private static void addNotegroup(Schema schema){
+	 noteGroup = schema.addEntity("Group");
+
+	 noteGroup.addIntProperty("id");
+	 noteGroup.addStringProperty("name");
+	 noteGroup.addStringProperty("description");
 }
  private static void addNotecategory(Schema schema){
 	 Entity note = schema.addEntity("Category");
@@ -71,4 +77,12 @@ public static void main(String[] args) throws Exception {
 	 note.addStringProperty("categorycol21");
 	 note.addStringProperty("categorycol22");
 }
+
+
+	private static void addAutoTag(Schema schema) {
+		Entity note = schema.addEntity("AutoTag");
+		note.addIdProperty();
+		note.addStringProperty("name");
+		note.addBooleanProperty("checked");
+	}
 }
